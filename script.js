@@ -1,6 +1,3 @@
-let new_password = ''
-// let possibleCharacters = ''
-
 // password length provided by prompt
 let lowercaseString = "abcdefghijklmnopqrstuvwxyz"
 let uppercaseString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -15,33 +12,33 @@ function passwordSelection() {
     prompt('What would you like the Length of password to be?')
   );
 
-  // checks to see ifpassword length is between 8 & 126.
+  // checks to see if password length is between 8 & 126, and notifies user of necessary criteria.
 if (passwordLength < 8 || passwordLength > 127) {
     alert('Password length must be provided as a number greater than 8 and less than 127.')
   }
 
-  let includesSpecialCharString = confirm(
+  let includesSpecialChar = confirm(
     'Click OK to include special characters, if not press cancel.'
   );
 
-  let includesNumberString = confirm(
+  let includesNumber = confirm(
     'Click OK to confirm including numeric characters, if not press cancel.'
   );
 
-  let includesLowercaseString = confirm(
+  let includesLowercase = confirm(
     'Click OK if you would like to include lower case letters, if not press cancel.'
   );
 
-  let includesUppercaseString = confirm(
+  let includesUppercase = confirm(
     'Click OK to confirm you would like uppercase charaters, if not press cancel.'
   );
 
 // Ensures user is selecting at least one of the criteria needed in order to generate a password.
   if (
-    includesSpecialCharString === false &&
-    includesNumericCharacters === false &&
-    includesLowercaseString === false &&
-    includesUppercaseString === false
+    includesSpecialChar === false &&
+    includesNumber === false &&
+    includesLowercase === false &&
+    includesUppercase === false
   ) {
     alert('Please select at least one character.');
   }
@@ -49,31 +46,77 @@ if (passwordLength < 8 || passwordLength > 127) {
   // Storage for users password.
    let passwordSelection = {
     passwordLength: passwordLength,
-    includesSpecialCharString: includesSpecialCharString,
-    includesNumberString: includesNumberString,
-    includesUppercaseString: includesUppercaseString,
-    includesUpperCasedCharacters: includesUpperCasedCharacters,
+    includesSpecialChar: includesSpecialChar,
+    includesNumber: includesNumber,
+    includesUppercase: includesUppercase,
+    includesLowercase: includesLowercase,
   };
+
+  return passwordSelection;
 }
 
 // Generating random element for password. 
 //Input Math floor to make sure password doesn't obtain decimal.
 function getRandomPassword(arr) {
-   randomizedIndex = Math.floor(Math.random() * arr.length);
-   randomizedElement = arr[randomIndex];
+   let randomIndex = Math.floor(Math.random() * arr.length);
+   let randomElement = arr[randomIndex];
 
   return randomElement;
 }
-
 // This function generates the password after user selects their necessary criteria. 
-generatePassword() { 
-  options = getRandomPassowrd();
+function generatePassword() {
+ let options = passwordSelection();
 
-// Stores password.
-  result = [];
+  // Stores password.
+   let result = [];
+  
+   // Stores character types to include in password.
+  let possibleCharacters = [];
+  let appliedCharacters = [];
 
- // Stores character types to include in password.
-  possibleCharacters = [];
+// Adds potential special characters into password.
+ if (options.includesSpecialChar) {
+   possibleCharacters = possibleCharacters.concat(specialCharString);
+   appliedCharacters.push(getRandom(specialCharString));
+ }
 
+// Adds potential numbers into password.
+ if (options.includesNumber) {
+   possibleCharacters = possibleCharacters.concat(numberString);
+   appliedCharacters.push(getRandom(numberString));
+ }
 
+ // Adds potential lower caseletters into password.
+ 
+ if (options.includesLowercase) {
+   possibleCharacters = possibleCharacters.concat(lowercaseString);
+   appliedCharacters.push(getRandom(lowercaseString));
+ }
 
+ // Adds potential uppercase letters into password.
+
+ if (options.includesUppercase) {
+   possibleCharacters = possibleCharacters.concat(uppercaseString);
+   appliedCharacters.push(getRandom(uppercaseString));
+ }
+
+// For loop to generate password that will be generated witihn user's selected criteria. 
+ for (var i = 0; i < options.length; i++) {
+  let possibleCharacter = getRandom(possibleCharacters);
+
+   result.push(possibleCharacter);
+ }
+ return result.join('');
+}
+
+let generateBtn = document.querySelector('#generate');
+
+function writePassword() {
+ let password = generatePassword();
+ let passwordText = document.querySelector('#password');
+
+ passwordText.value = password;
+}
+
+// Generates functioning button.
+generateBtn.addEventListener('click', writePassword);
