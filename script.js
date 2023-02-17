@@ -1,5 +1,5 @@
 let new_password = ''
-let possibleCharacters = ''
+// let possibleCharacters = ''
 
 // password length provided by prompt
 let lowercaseString = "abcdefghijklmnopqrstuvwxyz"
@@ -64,4 +64,16 @@ function getRandomPassword(arr) {
 
   return randomElement;
 }
+
+// This function generates the password after user selects their necessary criteria. 
+generatePassword() { 
+  options = getRandomPassowrd();
+
+// Stores password.
+  result = [];
+
+ // Stores character types to include in password.
+  possibleCharacters = [];
+
+
 
