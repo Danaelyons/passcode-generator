@@ -57,7 +57,7 @@ if (passwordLength < 8 || passwordLength > 127) {
 
 // Generating random element for password. 
 //Input Math floor to make sure password doesn't obtain decimal.
-function getRandomPassword(arr) {
+function getRandom(arr) {
    let randomIndex = Math.floor(Math.random() * arr.length);
    let randomElement = arr[randomIndex];
 
@@ -101,7 +101,7 @@ function generatePassword() {
  }
 
 // For loop to generate password that will be generated witihn user's selected criteria. 
- for (var i = 0; i < options.length; i++) {
+ for (i = 0; i < appliedCharacters.length; i++) {
   let possibleCharacter = getRandom(possibleCharacters);
 
    result.push(possibleCharacter);
