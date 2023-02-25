@@ -2,7 +2,7 @@
 # Description
 I have developed a passcode generator. 
 This passcode generator allows users passwords with set criteria. 
-Passwords must be greater than 8 characters and less than 126.
+Passwords must be greater than 8 characters and less than 128.
 This user will be prompted/altered with questions to generate a properly designed password.
 
 # Preview
