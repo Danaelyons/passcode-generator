@@ -12,8 +12,8 @@ function passwordSelection() {
     prompt('What would you like the Length of password to be?')
   );
 
-  // checks to see if password length is between 8 & 126, and notifies user of necessary criteria.
-if (passwordLength < 8 || passwordLength > 127) {
+  // checks to see if password length is between 8 & 128, and notifies user of necessary criteria.
+if (passwordLength < 8 || passwordLength > 129) {
     alert('Password length must be provided as a number greater than 8 and less than 127.')
   }
 
